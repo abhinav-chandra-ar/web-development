@@ -1,9 +1,12 @@
 var http = require('http')
 var fs = require('fs')
+var url = require('url')
 
 http.createServer((req,res)=>{
 
-    if (req.url === '/'){
+    var q = url.parse(req.url,true);
+
+    if (q.pathname === '/'){
         fs.readFile('./html files/hello.htm',(err,data)=>{
             
             res.writeHead(200,{'Content-Type':'text/html'})
@@ -12,19 +15,26 @@ http.createServer((req,res)=>{
             
         })
     }
-    else if (req.url === '/signup'){
+    else if (q.pathname === '/signup'){
 
         fs.readFile('./html files/signup.html',(err,data)=>{
         
             res.writeHead(200,{'Content-Type':'text/html'})
             res.write(data)
             res.end()
-    })
-}
+        })
+    }
 
-    else if(req.url === '/login'){
+    else if(q.pathname === '/login'){
         res.write('Login')
         res.end()
+    }
+
+    else if(q.pathname=== '/signupaction'){
+
+        res.write('Form submitted')
+        res.end()
+        console.log(q.query)
     }
     else{
         res.writeHead(404,{'Content-Type': 'text/html'})
