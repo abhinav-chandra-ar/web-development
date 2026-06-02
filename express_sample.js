@@ -1,8 +1,16 @@
 var express = require('express')
-var app = express();
+const path = require('path')
+const app = express();
 
 app.get('/',(req,res)=>{
-    res.send('Hello')
+   res.sendFile('C:\\Users\\91918\\OneDrive\\Desktop\\web devolooper\\html files\\html files\\signup.html')
 })
 
-app.listen(3000,()=> console.log('server started'))
+app.get('/about',(req,res)=>{
+    res.send('about')
+})
+
+app.listen(3000,()=> {
+    console.log(__dirname)
+    console.log('server started')
+})
