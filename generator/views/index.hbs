@@ -1,0 +1,38 @@
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script> 
+<script id="details-template" type="text/x-handlebars-template">
+	<p>My name is {{name}}. I am {{age}} years old.</p>
+</script>
+	 <div id='mainDiv'>
+	<div id='formDiv'>
+		<form action = "submit" method="POST">
+			<fieldset>
+				<legend>Register here</legend>
+				<table id='regDetails'>
+					<tr>
+						<td><label for='nameInput'>Name</label></td>
+						<td><input type='text' id='nameInput' name="name"/></td>
+					</tr>
+					<tr>
+						<td><label for='ageInput'>Age</label></td>
+						<td><input type='number' id='ageInput' name="age"/></td>
+					</tr>
+					<tr>
+						<td colspan='2'><input type='submit' id='submitButton'/></td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+	</div>
+	<div id='detailsBox'></div>
+</div>
+<script>
+$(document).ready( function() {
+var templateSource = $("#details-template").html();
+var template = Handlebars.compile(templateSource);
+	$('#submitButton').click(function(){
+			$("#detailsBox").html(template({"name":$('#nameInput').val(), "age":$('#ageInput').val()}));
+	});
+});
+</script>
+
